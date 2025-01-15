@@ -37,8 +37,7 @@ public class PathFollowing : MonoBehaviour
 
     private void CalculateForces()
     {
-        var desiredVelocity = (_currentTarget - transform.position).normalized * maxSpeed;
-
+        var desiredVelocity = (_currentTarget - transform.position).Copy(y: 0f).normalized * maxSpeed;
         var rawSteeringForce = desiredVelocity - body.velocity;
         var steering = Vector3.ClampMagnitude(rawSteeringForce, maxSteeringForce) / body.mass;
 
