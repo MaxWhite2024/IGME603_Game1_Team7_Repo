@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PathFollowing : MonoBehaviour
@@ -9,7 +8,7 @@ public class PathFollowing : MonoBehaviour
     [SerializeField] [Range(0.1f, 50f)] private float maxSteeringForce = 2f;
     [SerializeField] [Range(0.1f, 100f)] private float cornerCutting = 5f;
 
-    private Vector3 _currentTarget = new();
+    private Vector3 _currentTarget;
     private int _currentIndex = -1;
 
     private void Start()
