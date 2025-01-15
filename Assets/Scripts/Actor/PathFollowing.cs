@@ -19,7 +19,12 @@ public class PathFollowing : MonoBehaviour
 
     private void NextTarget()
     {
-        if (path.nodes.Count <= 0) return;
+        if (path && path.nodes.Count <= 0)
+        {
+            Debug.LogError("Path is not properly configured!");
+            _currentIndex = -1;
+            return;
+        }
         _currentIndex = (_currentIndex + 1) % path.nodes.Count;
         _currentTarget = path.nodes[_currentIndex].position;
     }
