@@ -221,8 +221,8 @@ Transform:
   m_GameObject: {fileID: 195660780}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 1, z: 15}
+  m_LocalPosition: {x: 0, y: -0, z: 33.9645}
+  m_LocalScale: {x: 15, y: 1, z: 82.929}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -256,8 +256,7 @@ Transform:
   m_LocalPosition: {x: 0.70281, y: 1.26, z: 0.4804982}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 615817617}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1773428102 &412184083
@@ -298,6 +297,7 @@ GameObject:
   - component: {fileID: 615817617}
   - component: {fileID: 615817619}
   - component: {fileID: 615817618}
+  - component: {fileID: 615817620}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -314,11 +314,11 @@ Transform:
   m_GameObject: {fileID: 615817616}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.79, z: -8.06}
+  m_LocalPosition: {x: 0.70281, y: 3.05, z: -7.579502}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 412184082}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &615817618
 AudioListener:
@@ -379,6 +379,33 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1773428102 &615817620
+ParentConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615817616}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_TranslationAtRest: {x: 0.70281, y: 3.05, z: -7.579502}
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_TranslationOffsets:
+  - {x: 0, y: 1.79, z: -8.06}
+  m_RotationOffsets:
+  - {x: 0, y: 0, z: 0}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_AffectRotationX: 1
+  m_AffectRotationY: 1
+  m_AffectRotationZ: 1
+  m_Active: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 412184082}
+    weight: 1
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,7 +650,7 @@ MonoBehaviour:
   player_Rigidbody: {fileID: 1938284935}
   player_Horizontal_Transform: {fileID: 412184082}
   move_Force: 2
-  horizontal_Pivot: {fileID: 412184081}
+  horizontal_Pivot: {fileID: 412184082}
   camera_Movespeed: 0
 --- !u!114 &1938284941
 MonoBehaviour:
@@ -663,3 +690,4 @@ SceneRoots:
   - {fileID: 195660784}
   - {fileID: 1938284939}
   - {fileID: 412184082}
+  - {fileID: 615817617}
