@@ -26,12 +26,12 @@ public class Player_Movement : MonoBehaviour
         
     }
 
-    void OnMove(Vector2 value)
+    void OnMove(InputValue value)
     {
         //calculate movement direction
         Vector3 move_Dir = Vector3.zero;
-        move_Dir.z = value.y;
-        move_Dir.x = value.x;
+        move_Dir.z = value.Get<Vector2>().y;
+        move_Dir.x = value.Get<Vector2>().x;
             //player_Horizontal_Transform.rotation.eulerAngles;
 
         //apply move_Force force to the player in the horizontal direction the camera is facing
