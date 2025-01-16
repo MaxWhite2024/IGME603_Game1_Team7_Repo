@@ -39,6 +39,10 @@ public class PlayerRatCollection : MonoBehaviour
         {
             if (ratCount >= checker.ratCountNeeded)
             {
+                if(checker is FireHydrant fireHydrant)
+                {
+                    fireHydrant.EnoughRats();
+                }
                 checker.EnoughRats();
             }
             else
