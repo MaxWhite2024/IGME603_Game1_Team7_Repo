@@ -23,9 +23,6 @@ public class PlayerRatCollection : MonoBehaviour
     private void CollisionLogic(Collider collider)
     {
         Rat rat = collider.GetComponent<Rat>();
-        RatChecker checker = collider.GetComponent<RatChecker>();
-        if(rat == null && checker == null)
-            return;
         if (rat != null)
         {
             //Debug.Log("Rat is here");
@@ -34,12 +31,16 @@ public class PlayerRatCollection : MonoBehaviour
 
             scale = new Vector3(scale.x + ratScaleAmount.x, scale.y + ratScaleAmount.y, scale.z + ratScaleAmount.z);
             transform.localScale = scale;
+            return;
         }
-        else
+
+        //Not colliding with a rat
+        RatChecker checker = collider.GetComponent<RatChecker>();
+        if (checker != null)
         {
             if (ratCount >= checker.ratCountNeeded)
             {
-                if(checker is FireHydrant fireHydrant)
+                if (checker is FireHydrant fireHydrant)
                 {
                     fireHydrant.EnoughRats();
                 }
@@ -49,6 +50,17 @@ public class PlayerRatCollection : MonoBehaviour
             {
                 Debug.Log("You need more rats");
             }
+            return;
+        }
+
+        BouncyThings bouncy = collider.GetComponent<BouncyThings>();
+        if(bouncy != null)
+        {
+            Vector3 newVelocity = gameObject.GetComponent<Rigidbody>().velocity;
+            newVelocity.y = newVelocity.y * bouncy.bounceDampener;
+            Debug.Log(newVelocity.y);
+
+            gameObject.GetComponent<Rigidbody>().velocity = newVelocity;
         }
 
     }
