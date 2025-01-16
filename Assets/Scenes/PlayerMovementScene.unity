@@ -220,13 +220,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 195660780}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.06957974, w: 0.9975764}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 15, y: 1, z: 15}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -7.98}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &412184081
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,6 +236,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 412184082}
+  - component: {fileID: 412184083}
   m_Layer: 0
   m_Name: Camera Pivot
   m_TagString: Untagged
@@ -251,13 +252,41 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 412184081}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.70281, y: 1.26, z: 0.4804982}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1938284939}
+  m_Children:
+  - {fileID: 615817617}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1773428102 &412184083
+ParentConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412184081}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_TranslationAtRest: {x: 0.70281, y: 1.26, z: 0.4804982}
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_TranslationOffsets:
+  - {x: 0, y: 0, z: 0}
+  m_RotationOffsets:
+  - {x: 0, y: 0, z: 0}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_AffectRotationX: 0
+  m_AffectRotationY: 0
+  m_AffectRotationZ: 0
+  m_Active: 1
+  m_IsLocked: 0
+  m_Sources:
+  - sourceTransform: {fileID: 1938284939}
+    weight: 1
 --- !u!1 &615817616
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,7 +318,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1938284939}
+  m_Father: {fileID: 412184082}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &615817618
 AudioListener:
@@ -576,9 +605,7 @@ Transform:
   m_LocalPosition: {x: 0.70281, y: 1.26, z: 0.4804982}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 412184082}
-  - {fileID: 615817617}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1938284940
@@ -593,9 +620,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ada661646b3c4d4d9fe93dc49a28ba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_Rigidbody: {fileID: 0}
-  move_Force: 0
-  horizontal_Pivot: {fileID: 0}
+  player_Rigidbody: {fileID: 1938284935}
+  player_Horizontal_Transform: {fileID: 412184082}
+  move_Force: 1
+  horizontal_Pivot: {fileID: 412184081}
   camera_Movespeed: 0
 --- !u!114 &1938284941
 MonoBehaviour:
@@ -634,3 +662,4 @@ SceneRoots:
   - {fileID: 705507995}
   - {fileID: 195660784}
   - {fileID: 1938284939}
+  - {fileID: 412184082}

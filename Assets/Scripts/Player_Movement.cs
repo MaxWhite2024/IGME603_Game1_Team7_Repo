@@ -7,6 +7,7 @@ public class Player_Movement : MonoBehaviour
 {
     [Header("Player Movement Variables")]
     [SerializeField] private Rigidbody player_Rigidbody;
+    [SerializeField] private Transform player_Horizontal_Transform;
     [SerializeField] private float move_Force = 0f;
 
     [Header("Camera Movement Variables")]
@@ -25,9 +26,16 @@ public class Player_Movement : MonoBehaviour
         
     }
 
-    void OnMove(InputValue value)
+    void OnMove(Vector2 value)
     {
-        //apply move_Force force in the horizontal direction the camera is facing to the player
-        player_Rigidbody.AddForce(horizontal_Pivot.transform.position * move_Force, ForceMode.Impulse);
+        //calculate movement direction
+        Vector3 move_Dir = Vector3.zero;
+        move_Dir.z = value.y;
+        move_Dir.x = value.x;
+            //player_Horizontal_Transform.rotation.eulerAngles;
+
+        //apply move_Force force to the player in the horizontal direction the camera is facing
+        player_Rigidbody.AddForce(move_Dir * move_Force, ForceMode.Impulse);
+        //player_Horizontal_Transform.rotation.eulerAngles
     }
 }
