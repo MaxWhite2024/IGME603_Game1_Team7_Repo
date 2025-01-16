@@ -23,7 +23,7 @@ public class Player_Movement : MonoBehaviour
             //player_Horizontal_Transform.rotation.eulerAngles;
 
         //apply move_Force force to the player in the horizontal direction the camera is facing
-        player_Rigidbody.AddForce(move_Dir * move_Force);
+        player_Rigidbody.AddForce(move_Dir * move_Force, ForceMode.Impulse);
         //player_Horizontal_Transform.rotation.eulerAngles
     }
 }
