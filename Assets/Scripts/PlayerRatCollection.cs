@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerRatCollection : MonoBehaviour
 {
-    public short rats;
+    public short ratCount;
     public Vector3 ratScaleAmount;
     [SerializeField] private Vector3 scale;
 
@@ -23,16 +23,30 @@ public class PlayerRatCollection : MonoBehaviour
     private void CollisionLogic(Collider collider)
     {
         Rat rat = collider.GetComponent<Rat>();
-        if(rat == null)
+        RatChecker checker = collider.GetComponent<RatChecker>();
+        if(rat == null && checker == null)
             return;
-        
-        //Debug.Log("Rat is here");
-        rats += rat.ratCount;
-        Destroy(rat.gameObject);
+        if (rat != null)
+        {
+            //Debug.Log("Rat is here");
+            ratCount += rat.ratCount;
+            Destroy(rat.gameObject);
 
-        scale = new Vector3(scale.x + ratScaleAmount.x, scale.y + ratScaleAmount.y, scale.z + ratScaleAmount.z);
-        transform.localScale = scale;
-        
+            scale = new Vector3(scale.x + ratScaleAmount.x, scale.y + ratScaleAmount.y, scale.z + ratScaleAmount.z);
+            transform.localScale = scale;
+        }
+        else
+        {
+            if (ratCount >= checker.ratCountNeeded)
+            {
+                checker.EnoughRats();
+            }
+            else
+            {
+                Debug.Log("You need more rats");
+            }
+        }
+
     }
 
     private void OnCollisionEnter(Collision collision)
