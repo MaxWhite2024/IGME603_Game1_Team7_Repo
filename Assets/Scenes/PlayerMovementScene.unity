@@ -651,7 +651,7 @@ MonoBehaviour:
   player_Horizontal_Transform: {fileID: 412184082}
   move_Force: 2
   horizontal_Pivot: {fileID: 412184082}
-  camera_Movespeed: 0
+  camera_Movespeed: 2
 --- !u!114 &1938284941
 MonoBehaviour:
   m_ObjectHideFlags: 0
