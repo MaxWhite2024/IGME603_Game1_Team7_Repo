@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 412184082}
   - component: {fileID: 412184083}
   m_Layer: 0
-  m_Name: Camera Pivot
+  m_Name: Horizontal Camera Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -285,6 +285,65 @@ ParentConstraint:
   m_IsLocked: 0
   m_Sources:
   - sourceTransform: {fileID: 1938284939}
+    weight: 1
+--- !u!1 &543091975
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 543091976}
+  - component: {fileID: 543091977}
+  m_Layer: 0
+  m_Name: Veritcal Camera Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &543091976
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543091975}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.70281, y: 1.26, z: 0.4804982}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1773428102 &543091977
+ParentConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 543091975}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_TranslationAtRest: {x: 0.70281, y: 1.26, z: 0.4804982}
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_TranslationOffsets:
+  - {x: 0, y: 0, z: 0}
+  m_RotationOffsets:
+  - {x: 0, y: 0, z: 0}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_AffectRotationX: 0
+  m_AffectRotationY: 0
+  m_AffectRotationZ: 0
+  m_Active: 1
+  m_IsLocked: 0
+  m_Sources:
+  - sourceTransform: {fileID: 412184082}
     weight: 1
 --- !u!1 &615817616
 GameObject:
@@ -404,7 +463,7 @@ ParentConstraint:
   m_Active: 1
   m_IsLocked: 1
   m_Sources:
-  - sourceTransform: {fileID: 412184082}
+  - sourceTransform: {fileID: 543091976}
     weight: 1
 --- !u!1 &705507993
 GameObject:
@@ -647,11 +706,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ada661646b3c4d4d9fe93dc49a28ba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_Rigidbody: {fileID: 1938284935}
-  player_Horizontal_Transform: {fileID: 412184082}
-  move_Force: 2
-  horizontal_Pivot: {fileID: 412184082}
-  camera_Movespeed: 2
+  playerRigidbody: {fileID: 1938284935}
+  moveForce: 6
+  horizontalPivot: {fileID: 412184082}
+  cameraMovespeed: 2
 --- !u!114 &1938284941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,4 +748,5 @@ SceneRoots:
   - {fileID: 195660784}
   - {fileID: 1938284939}
   - {fileID: 412184082}
+  - {fileID: 543091976}
   - {fileID: 615817617}
