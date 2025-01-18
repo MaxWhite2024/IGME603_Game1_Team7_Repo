@@ -56,13 +56,14 @@ public class Player_Movement : MonoBehaviour
         }
 
         //Debug.Log(cameraTurnDir);
-        //is player inputting a camera turning input,...
+        //is player inputting a horizontal camera turning input,...
         if(isCameraHorizontalTurning)
         {
             //rotate the horizontal camera pivot point by cameraTurnDir.x
             horizontalCameraPivot.Rotate(0f, cameraTurnDir.x * cameraMovespeed, 0f);
         }
 
+        //if player is inputting a vertical camera  turning input,...
         if(isCameraVerticalTurning)
         {
             //rotate the vertical camera pivot point by cameraTurnDir.y clamped between -90 and 90
@@ -89,7 +90,7 @@ public class Player_Movement : MonoBehaviour
 
     void OnCameraMove(InputValue value)
     {
-        Debug.Log(value.Get<Vector2>());
+        //Debug.Log(value.Get<Vector2>());
         //if player started turning the camera horizontally,...
         if(value.Get<Vector2>().x != 0f)
         {
