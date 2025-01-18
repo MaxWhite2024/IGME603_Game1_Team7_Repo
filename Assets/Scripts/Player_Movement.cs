@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class Player_Movement : MonoBehaviour
 {
@@ -17,9 +18,10 @@ public class Player_Movement : MonoBehaviour
 
     [Header("Camera Movement Variables")]
     [SerializeField] private Transform horizontalCameraPivot;
-    [SerializeField] private Transform verticalCameraPivot;
+    //[SerializeField] private Transform verticalCameraPivot;
     [SerializeField] private float cameraMovespeed = 0f;
-    private bool isCameraHorizontalTurning, isCameraVerticalTurning = false;
+    private bool isCameraHorizontalTurning = false;
+    private bool isCameraVerticalTurning = false;
     private Vector3 cameraTurnDir = Vector3.zero;
 
     private void FixedUpdate()
@@ -56,19 +58,22 @@ public class Player_Movement : MonoBehaviour
         }
 
         //Debug.Log(cameraTurnDir);
+
+        horizontalCameraPivot.Rotate(cameraTurnDir.x * cameraMovespeed, cameraTurnDir.y * cameraMovespeed, 0f);
+
         //is player inputting a horizontal camera turning input,...
-        if(isCameraHorizontalTurning)
-        {
-            //rotate the horizontal camera pivot point by cameraTurnDir.x
-            horizontalCameraPivot.Rotate(0f, cameraTurnDir.x * cameraMovespeed, 0f);
-        }
+        //if(camn)
+        //{
+        //    //rotate the horizontal camera pivot point by cameraTurnDir.x
+        //    horizontalCameraPivot.Rotate(0f, cameraTurnDir.x * cameraMovespeed, 0f);
+        //}
 
         //if player is inputting a vertical camera  turning input,...
-        if(isCameraVerticalTurning)
-        {
-            //rotate the vertical camera pivot point by cameraTurnDir.y clamped between -90 and 90
-            verticalCameraPivot.Rotate(cameraTurnDir.y * cameraMovespeed, 0f, 0f);
-        }
+        //if(isCameraVerticalTurning)
+        //{
+        //    //rotate the vertical camera pivot point by cameraTurnDir.y clamped between -90 and 90
+        //    verticalCameraPivot.Rotate(cameraTurnDir.y * cameraMovespeed, 0f, 0f);
+        //}
     }
 
     void OnMove(InputValue value)
@@ -90,9 +95,18 @@ public class Player_Movement : MonoBehaviour
 
     void OnCameraMove(InputValue value)
     {
+        //if(value.Get<Vector2>() != Vector2.zero)
+        //{
+        //    cameraTurnDir = value.Get<Vector2>();
+        //}
+        //else
+        //{
+        //    cameraTurnDir = Vector2.zero;
+        //}
+
         //Debug.Log(value.Get<Vector2>());
         //if player started turning the camera horizontally,...
-        if(value.Get<Vector2>().x != 0f)
+        if (value.Get<Vector2>().x != 0f)
         {
             isCameraHorizontalTurning = true;
             cameraTurnDir.x = value.Get<Vector2>().x;
