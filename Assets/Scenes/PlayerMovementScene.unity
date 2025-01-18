@@ -531,7 +531,7 @@ Rigidbody:
   m_GameObject: {fileID: 1938284934}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 0.5
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -647,11 +647,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ada661646b3c4d4d9fe93dc49a28ba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_Rigidbody: {fileID: 1938284935}
-  player_Horizontal_Transform: {fileID: 412184082}
-  move_Force: 2
-  horizontal_Pivot: {fileID: 412184082}
-  camera_Movespeed: 2
+  playerRigidbody: {fileID: 1938284935}
+  playerHorizontalTransform: {fileID: 412184082}
+  moveForce: 4
+  horizontalPivot: {fileID: 412184082}
+  cameraMovespeed: 4
 --- !u!114 &1938284941
 MonoBehaviour:
   m_ObjectHideFlags: 0
