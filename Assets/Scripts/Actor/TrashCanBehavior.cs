@@ -45,7 +45,8 @@ public class TrashCanBehavior : MonoBehaviour
 
     private void SpawnItem()
     {
-        Instantiate(itemPrefab, transform.position + transform.forward, Quaternion.identity);
+        var spawnedItem = Instantiate(original: itemPrefab);
+        spawnedItem.transform.position = transform.position + transform.forward * 2f;
     }
 
     private void OnDrawGizmos()
