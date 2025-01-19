@@ -6,11 +6,17 @@ public class PauseManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
 
-    // TODO read input to pause
-
     private void Start()
     {
         pauseMenu.SetActive(false);
+    }
+
+    private void Update()
+    {
+        var pressedPause = Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Submit");
+        if (!pressedPause) return;
+        if (Time.timeScale > 0.5f) Pause();
+        else Unpause();
     }
 
     public void Pause()
