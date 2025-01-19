@@ -13,7 +13,7 @@ public class PauseManager : MonoBehaviour
 
     private void Update()
     {
-        var pressedPause = Input.GetKeyDown(KeyCode.Escape) || Input.GetButtonDown("Submit");
+        var pressedPause = Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7);
         if (!pressedPause) return;
         if (Time.timeScale > 0.5f) Pause();
         else Unpause();
