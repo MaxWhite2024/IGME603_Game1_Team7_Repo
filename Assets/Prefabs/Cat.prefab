@@ -156,7 +156,7 @@ MonoBehaviour:
   target: {fileID: 0}
   body: {fileID: 2074816976942608921}
   maxSteeringForce: 2
-  maxSpeed: 2
+  maxSpeed: 4
 --- !u!54 &2074816976942608921
 Rigidbody:
   m_ObjectHideFlags: 0

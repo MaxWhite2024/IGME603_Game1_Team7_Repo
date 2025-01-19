@@ -388,7 +388,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   path: {fileID: 0}
   body: {fileID: 3852257110044340538}
-  maxSpeed: 5
+  maxSpeed: 6
   maxSteeringForce: 0.2
   cornerCutting: 5
 --- !u!1 &7272348990944772125
