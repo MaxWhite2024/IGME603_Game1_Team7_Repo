@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd2142b963d0481e9c39422a39123c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requirement: 0
+  requirement: 5
   visual: {fileID: 2135116016416925180}
   itemPrefab: {fileID: 0}
 --- !u!1001 &115702532904392489

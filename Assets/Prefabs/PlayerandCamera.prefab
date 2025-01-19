@@ -253,8 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ratCount: 1
-  ratScaleAmount: {x: 0, y: 0, z: 0}
-  scale: {x: 0, y: 0, z: 0}
+  collectiveHitbox: {fileID: 3920859553509280103}
 --- !u!1 &4402323142231814773
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,7 +372,7 @@ Transform:
   m_GameObject: {fileID: 4425732763230387730}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.70281, y: 1.26, z: 0.4804983}
+  m_LocalPosition: {x: 0.70281, y: 1.26, z: 0.4804982}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -467,7 +466,7 @@ Transform:
   m_GameObject: {fileID: 5009059328522775789}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.70281, y: 1.26, z: 0.4804983}
+  m_LocalPosition: {x: 0.70281, y: 1.26, z: 0.4804982}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

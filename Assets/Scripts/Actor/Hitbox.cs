@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Hitbox : MonoBehaviour
 {
-    [SerializeField] private int damage = 1;
+    public int damage = 1;
 
     private void OnTriggerEnter(Collider other)
     {

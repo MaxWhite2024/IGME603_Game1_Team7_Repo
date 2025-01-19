@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerRatCollection : MonoBehaviour
 {
     public short ratCount;
+    [SerializeField] private Hitbox collectiveHitbox;
 
     // Start is called before the first frame update
     void Start()
@@ -14,7 +15,6 @@ public class PlayerRatCollection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     private void CollisionLogic(Collider collider)
@@ -24,6 +24,7 @@ public class PlayerRatCollection : MonoBehaviour
         {
             //Debug.Log("Rat is here");
             ratCount += rat.ratCount;
+            if (collectiveHitbox) collectiveHitbox.damage = ratCount;
             collider.transform.parent = transform;
             return;
         }
@@ -38,17 +39,19 @@ public class PlayerRatCollection : MonoBehaviour
                 {
                     fireHydrant.EnoughRats();
                 }
+
                 checker.EnoughRats();
             }
             else
             {
                 Debug.Log("You need more rats");
             }
+
             return;
         }
 
         BouncyThings bouncy = collider.GetComponent<BouncyThings>();
-        if(bouncy != null)
+        if (bouncy != null)
         {
             gameObject.GetComponent<Rigidbody>().useGravity = false; //Disables gravity so you don't fall down
 
@@ -58,7 +61,8 @@ public class PlayerRatCollection : MonoBehaviour
             }
 
             //This is part of the super cursed don't fall through the bounce code. Sets velocity to 0 when it's too low so you don't forever bounce
-            if (gameObject.GetComponent<Rigidbody>().velocity.y >= (0 - 1.5f) && gameObject.GetComponent<Rigidbody>().velocity.y <= (0 + 1.5f))
+            if (gameObject.GetComponent<Rigidbody>().velocity.y >= (0 - 1.5f) &&
+                gameObject.GetComponent<Rigidbody>().velocity.y <= (0 + 1.5f))
             {
                 Vector3 zeroVelocity = gameObject.GetComponent<Rigidbody>().velocity;
                 zeroVelocity.y = 0;
@@ -74,7 +78,6 @@ public class PlayerRatCollection : MonoBehaviour
             gameObject.GetComponent<Rigidbody>().velocity = newVelocity;
             Debug.Log(gameObject.GetComponent<Rigidbody>().velocity);
         }
-
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -85,12 +88,10 @@ public class PlayerRatCollection : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         CollisionLogic(other);
-
     }
 
     private void OnTriggerExit(Collider other)
     {
         gameObject.GetComponent<Rigidbody>().useGravity = true; //Enables gravity when you exit bouncy thing
-
     }
 }
