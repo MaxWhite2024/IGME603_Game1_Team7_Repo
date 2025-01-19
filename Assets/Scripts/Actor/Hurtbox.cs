@@ -3,9 +3,9 @@ using UnityEngine.Events;
 
 public class Hurtbox : MonoBehaviour
 {
-    public UnityEvent<float> onDamageTaken;
+    public UnityEvent<int> onDamageTaken;
 
-    public void TakeDamage(float amount)
+    public void TakeDamage(int amount)
     {
         onDamageTaken?.Invoke(amount);
     }

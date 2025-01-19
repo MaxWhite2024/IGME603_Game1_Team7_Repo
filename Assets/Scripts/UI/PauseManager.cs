@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,6 +7,11 @@ public class PauseManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
 
     // TODO read input to pause
+
+    private void Start()
+    {
+        pauseMenu.SetActive(false);
+    }
 
     public void Pause()
     {

@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 7100907251565133221}
   - component: {fileID: 4862118489238079117}
   m_Layer: 9
-  m_Name: Hitbox
+  m_Name: CarHitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 3600381567611857591}
   - component: {fileID: 3852257110044340538}
   - component: {fileID: 509220753582113176}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
