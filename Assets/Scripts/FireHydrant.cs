@@ -11,7 +11,10 @@ public class FireHydrant : RatChecker
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(player == null)
+        {
+            player = GameObject.Find("PlayerBall");
+        }
     }
 
     // Update is called once per frame

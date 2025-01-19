@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 4604496742985737735}
   - component: {fileID: 3920859553509280103}
   - component: {fileID: 711289420266255703}
+  - component: {fileID: 6634619333662350488}
   m_Layer: 8
   m_Name: PlayerBall
   m_TagString: Untagged
@@ -234,6 +235,21 @@ MonoBehaviour:
   onDamageTaken:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6634619333662350488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863024876728598553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b4af8ee17503549a35478a146ca034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ratCount: 1
+  ratScaleAmount: {x: 0, y: 0, z: 0}
+  scale: {x: 0, y: 0, z: 0}
 --- !u!1 &4402323142231814773
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,7 +368,7 @@ Transform:
   m_GameObject: {fileID: 4425732763230387730}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.70281005, y: 1.26, z: 0.48049808}
+  m_LocalPosition: {x: 0.70281, y: 1.26, z: 0.4804982}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -446,7 +462,7 @@ Transform:
   m_GameObject: {fileID: 5009059328522775789}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.70281005, y: 1.26, z: 0.48049808}
+  m_LocalPosition: {x: 0.70281, y: 1.26, z: 0.4804982}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

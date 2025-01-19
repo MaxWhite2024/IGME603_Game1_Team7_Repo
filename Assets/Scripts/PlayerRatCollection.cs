@@ -5,13 +5,10 @@ using UnityEngine;
 public class PlayerRatCollection : MonoBehaviour
 {
     public short ratCount;
-    public Vector3 ratScaleAmount;
-    [SerializeField] private Vector3 scale;
 
     // Start is called before the first frame update
     void Start()
     {
-        scale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -28,11 +25,6 @@ public class PlayerRatCollection : MonoBehaviour
             //Debug.Log("Rat is here");
             ratCount += rat.ratCount;
             collider.transform.parent = transform;
-
-            //Destroy(rat.gameObject);
-
-            //scale = new Vector3(scale.x + ratScaleAmount.x, scale.y + ratScaleAmount.y, scale.z + ratScaleAmount.z);
-            //transform.localScale = scale;
             return;
         }
 
