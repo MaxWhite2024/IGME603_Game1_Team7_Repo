@@ -21,6 +21,12 @@ public class Player_Movement : MonoBehaviour
     private bool isCameraVerticalTurning = false;
     private Vector3 cameraTurnDir = Vector3.zero;
 
+    [Header("Player Jump Varaibles")]
+    [SerializeField] private float jumpForce = 1f;
+    [SerializeField] private float groundCheckBoxVerticalOffset = 0f;
+    [SerializeField] private float groundCheckBoxSize = 1f;
+    private bool isGroundDetected;
+
     private void FixedUpdate()
     {
         //Debug.Log(horizontalPivot.forward);
@@ -114,5 +120,29 @@ public class Player_Movement : MonoBehaviour
             isCameraVerticalTurning = false;
             cameraTurnDir.y = 0f;
         }
+    }
+
+    void OnJump()
+    {
+        //box cast from:
+        //center = gameObject.transform.position + new Vector3(0f, groundCheckBoxVerticalOffset, 0f)
+        //halfExtends = Vector3.one * groundCheckBoxSize / 2f
+        //orientation = Quaternion.identity
+        //layerMask = LayerMask.GetMask("Ground")
+        isGroundDetected = Physics.CheckBox(gameObject.transform.position + new Vector3(0f, groundCheckBoxVerticalOffset, 0f), Vector3.one * groundCheckBoxSize / 2f, Quaternion.identity, LayerMask.GetMask("Ground"));
+
+        //if CheckBox hit something,...
+        if (isGroundDetected)
+        {
+            //blast the player upwards by jumpForce
+            playerRigidbody.AddForce(horizontalCameraPivot.up * jumpForce, ForceMode.Impulse);
+        }
+    }
+
+    //draw the player's groundcheck hitbox
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(gameObject.transform.position + new Vector3(0f, groundCheckBoxVerticalOffset, 0f), Vector3.one * groundCheckBoxSize);
     }
 }
