@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,6 +11,11 @@ public class PauseManager : MonoBehaviour
     }
 
     private void Update()
+    {
+        HandlePauseButtonPressed();
+    }
+
+    private void HandlePauseButtonPressed()
     {
         var pressedPause = Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.JoystickButton7);
         if (!pressedPause) return;
@@ -33,6 +37,7 @@ public class PauseManager : MonoBehaviour
 
     public void MainMenu()
     {
+        Unpause();
         SceneManager.LoadScene("MainMenu");
     }
 
