@@ -36,8 +36,8 @@ public class FullScreenSetting : MonoBehaviour
         {
             0 => FullScreenMode.ExclusiveFullScreen,
             1 => FullScreenMode.FullScreenWindow,
-            2 => FullScreenMode.MaximizedWindow,
-            3 => FullScreenMode.MaximizedWindow,
+            2 => FullScreenMode.Windowed,
+            3 => FullScreenMode.Windowed,
             _ => throw new ArgumentOutOfRangeException()
         };
     }
