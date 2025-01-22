@@ -8,16 +8,24 @@ public class ResolutionSetting : MonoBehaviour
 
     private void Start()
     {
-        var currentResolution = Screen.currentResolution;
-
         resolutionOptions.AddOptions(
             Screen.resolutions
                 .Select(it => it.ToString())
                 .ToList()
         );
-        resolutionOptions.value = Screen.resolutions.ToList().IndexOf(currentResolution);
+        UpdateDefaultSelection();
 
         resolutionOptions.onValueChanged.AddListener(SetResolution);
+    }
+
+    private void UpdateDefaultSelection()
+    {
+        resolutionOptions.value = Screen.resolutions.ToList().IndexOf(Screen.currentResolution);
+    }
+
+    private void OnEnable()
+    {
+        UpdateDefaultSelection();
     }
 
     private void SetResolution(int option)
