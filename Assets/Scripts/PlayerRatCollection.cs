@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerRatCollection : MonoBehaviour
 {
     public short ratCount;
+    public Vector3 ratScaleAmount;
     [SerializeField] private Hitbox collectiveHitbox;
+    [SerializeField] private Vector3 scale;
 
     // Start is called before the first frame update
     void Start()
     {
+        scale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -26,6 +30,10 @@ public class PlayerRatCollection : MonoBehaviour
             ratCount += rat.ratCount;
             if (collectiveHitbox) collectiveHitbox.damage = ratCount;
             collider.transform.parent = transform;
+            collider.enabled = false;
+            scale = new Vector3(scale.x + ratScaleAmount.x, scale.y + ratScaleAmount.y, scale.z + ratScaleAmount.z);
+            transform.localScale = scale;//This will scale up the ball, but it scales rats and I'll troubleshoot later
+
             return;
         }
 
