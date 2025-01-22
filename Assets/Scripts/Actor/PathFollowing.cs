@@ -1,58 +1,64 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
-// Should probably refactor this to extend from TargetChaseMovement.cs
-// and simply update the target point when within the corner cutting radius
 public class PathFollowing : MonoBehaviour
 {
     [SerializeField] private Path path;
-    [SerializeField] private Rigidbody body;
     [SerializeField] private float maxSpeed = 2f;
-    [SerializeField] [Range(0.1f, 50f)] private float maxSteeringForce = 2f;
-    [SerializeField] [Range(0.1f, 100f)] private float cornerCutting = 5f;
+
+    [SerializeField] private float delayAtNodeDuration = 1f;
 
     private Transform _currentTarget;
-    private int _currentIndex = -1;
+    private Path.Iterator _currentIterator;
+
+    private float _reachedPointTime;
+    private bool _isMoving;
 
     private void Start()
     {
         NextTarget();
+        _isMoving = true;
     }
 
     private void NextTarget()
     {
-        if (path && path.nodes.Count <= 0)
-        {
-            Debug.LogError("Path is not properly configured!");
-            _currentIndex = -1;
-            return;
-        }
-        _currentIndex = (_currentIndex + 1) % path.nodes.Count;
-        _currentTarget = path.nodes[_currentIndex];
+        _currentIterator = path.GetNextIterator(_currentIterator);
+        _currentTarget = path.GetNode(_currentIterator);
+        _reachedPointTime = Time.time;
+        _isMoving = false;
     }
 
     private void FixedUpdate()
     {
-        CheckArrivedAtTarget();
-        CalculateForces();
-    }
-
-    private void CalculateForces()
-    {
-        var desiredVelocity = (_currentTarget.position - transform.position).Copy(y: 0f).normalized * maxSpeed;
-        var rawSteeringForce = desiredVelocity - body.velocity;
-        var steering = Vector3.ClampMagnitude(rawSteeringForce, maxSteeringForce) / body.mass;
-
-        var resultVelocity = Vector3.ClampMagnitude(body.velocity + steering, maxSpeed);
-        body.velocity = resultVelocity;
-        transform.LookAt(transform.position + resultVelocity);
-    }
-
-    private void CheckArrivedAtTarget()
-    {
-        var isNearCurrentTarget = transform.position.DistanceTo2DSquared(_currentTarget.position) < cornerCutting;
-        if (isNearCurrentTarget)
+        if (ShouldMove())
         {
-            NextTarget();
+            Move();
         }
+    }
+
+    private bool ShouldMove()
+    {
+        if (_isMoving) return true;
+        var nextMoveTime = _reachedPointTime + delayAtNodeDuration;
+        if (Time.time < nextMoveTime) return false;
+
+        _isMoving = true;
+        return true;
+    }
+
+    private void Move()
+    {
+        var distanceStep = maxSpeed * Time.fixedDeltaTime;
+        var targetVector = _currentTarget.position - transform.position;
+
+        if (Vector3.Magnitude(targetVector) < distanceStep)
+        {
+            transform.position = _currentTarget.position;
+            NextTarget();
+            return;
+        }
+
+        var vectorOffset = Vector3.ClampMagnitude(targetVector, distanceStep);
+        transform.position += vectorOffset;
     }
 }

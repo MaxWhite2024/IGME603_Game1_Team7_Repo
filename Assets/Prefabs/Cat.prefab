@@ -66,7 +66,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 10
+  m_Radius: 12
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2555437144278777747
 GameObject:
@@ -156,7 +156,7 @@ MonoBehaviour:
   target: {fileID: 0}
   body: {fileID: 2074816976942608921}
   maxSteeringForce: 2
-  maxSpeed: 4
+  maxSpeed: 3.5
 --- !u!54 &2074816976942608921
 Rigidbody:
   m_ObjectHideFlags: 0
