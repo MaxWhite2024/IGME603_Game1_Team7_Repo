@@ -5,27 +5,35 @@ public class PlayerRatCollection : MonoBehaviour
     public short ratCount;
     public float ratScaleAmount;
     [SerializeField] private Hitbox collectiveHitbox;
-    [SerializeField] private SphereCollider colliderToScale;
 
+    private SphereCollider[] _ratBallColliders;
     
-
-    private void CollisionLogic(Collider collider)
+    private void Start()
     {
-        Rat rat = collider.GetComponent<Rat>();
+        _ratBallColliders = GetComponents<SphereCollider>();
+    }
+
+
+    private void CollisionLogic(Collider otherCollider)
+    {
+        Rat rat = otherCollider.GetComponent<Rat>();
         if (rat != null)
         {
             //Debug.Log("Rat is here");
             ratCount += rat.ratCount;
             if (collectiveHitbox) collectiveHitbox.damage = ratCount;
-            collider.transform.parent = transform;
-            collider.enabled = false;
-            colliderToScale.radius += ratScaleAmount;
+            otherCollider.transform.parent = transform;
+            otherCollider.enabled = false;
+            foreach (var ratCollider in _ratBallColliders)
+            {
+                ratCollider.radius += ratScaleAmount;
+            }
 
             return;
         }
 
         //Not colliding with a rat
-        RatChecker checker = collider.GetComponent<RatChecker>();
+        RatChecker checker = otherCollider.GetComponent<RatChecker>();
         if (checker != null)
         {
             if (ratCount >= checker.ratCountNeeded)
@@ -45,7 +53,7 @@ public class PlayerRatCollection : MonoBehaviour
             return;
         }
 
-        BouncyThings bouncy = collider.GetComponent<BouncyThings>();
+        BouncyThings bouncy = otherCollider.GetComponent<BouncyThings>();
         if (bouncy != null)
         {
             gameObject.GetComponent<Rigidbody>().useGravity = false; //Disables gravity so you don't fall down
@@ -88,5 +96,10 @@ public class PlayerRatCollection : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         gameObject.GetComponent<Rigidbody>().useGravity = true; //Enables gravity when you exit bouncy thing
+    }
+
+    public void TakeDamage(int damage, Vector3 position)
+    {
+        
     }
 }
