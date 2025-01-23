@@ -6,15 +6,13 @@ using UnityEngine.UIElements;
 public class PlayerRatCollection : MonoBehaviour
 {
     public short ratCount;
-    public Vector3 ratScaleAmount;
+    public float ratScaleAmount;
     [SerializeField] private Hitbox collectiveHitbox;
-    [SerializeField] private Vector3 scale;
     [SerializeField] private SphereCollider colliderToScale;
 
     // Start is called before the first frame update
     void Start()
     {
-        scale = transform.GetChild(0).localScale;
     }
 
     // Update is called once per frame
@@ -32,9 +30,7 @@ public class PlayerRatCollection : MonoBehaviour
             if (collectiveHitbox) collectiveHitbox.damage = ratCount;
             collider.transform.parent = transform;
             collider.enabled = false;
-            scale = new Vector3(scale.x + ratScaleAmount.x, scale.y + ratScaleAmount.y, scale.z + ratScaleAmount.z);
-            colliderToScale.radius += .05f;
-            //transform.GetChild(0).localScale = scale;//This will scale up the ball, but it scales rats and I'll troubleshoot later
+            colliderToScale.radius += ratScaleAmount;
 
             return;
         }
