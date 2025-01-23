@@ -74,12 +74,12 @@ public class Player_Movement : MonoBehaviour
         {
             
             //rotate the vertical camera pivot point by cameraTurnDir.y clamped between -90 and 90
-            if (verticalCameraPivot.eulerAngles.y >= 89f && cameraTurnDir.y >= 1f)
-                cameraTurnDir.y = 0f;
-            else if(verticalCameraPivot.eulerAngles.y >= 269f && cameraTurnDir.y <= -1f)
-                cameraTurnDir.y = 0f; //Not working correctly
+            //if (verticalCameraPivot.localEulerAngles.y >= 89f && cameraTurnDir.y >= 1f)
+            //    cameraTurnDir.y = 0f;
+            //else if(verticalCameraPivot.localEulerAngles.y >= 269f && cameraTurnDir.y <= -1f)
+            //    cameraTurnDir.y = 0f; //Not working correctly
             verticalCameraPivot.Rotate(cameraTurnDir.y * cameraMovespeed, 0f, 0f);
-            //verticalCameraPivot.eulerAngles = new Vector3(verticalCameraPivot.eulerAngles.x, Mathf.Clamp(transform.eulerAngles.y, -89.8f, 89.9f), 0f);
+            verticalCameraPivot.eulerAngles = new Vector3(verticalCameraPivot.eulerAngles.x, Mathf.Clamp(transform.eulerAngles.y, -89.8f, 89.9f), 0f);
         }
     }
 
