@@ -838,6 +838,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerandCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 6634619333662350488, guid: aad19136699a252499b3b1d5434b4f6c, type: 3}
+      propertyPath: sus
+      value: 
+      objectReference: {fileID: 399366190}
+    - target: {fileID: 6634619333662350488, guid: aad19136699a252499b3b1d5434b4f6c, type: 3}
+      propertyPath: colliderToScale
+      value: 
+      objectReference: {fileID: 399366190}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1602,6 +1610,11 @@ Transform:
 --- !u!1 &399366182 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 863024876728598553, guid: aad19136699a252499b3b1d5434b4f6c, type: 3}
+  m_PrefabInstance: {fileID: 168086662}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &399366190 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 1635103961913107651, guid: aad19136699a252499b3b1d5434b4f6c, type: 3}
   m_PrefabInstance: {fileID: 168086662}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &419097118
