@@ -8,7 +8,9 @@ public class PlayerRatCollection : MonoBehaviour
 
     private SphereCollider[] _ratBallColliders;
     private Rigidbody _rigidbody;
-    
+
+    private bool _isImmune = false;
+
     private void Start()
     {
         _ratBallColliders = GetComponents<SphereCollider>();
@@ -102,8 +104,32 @@ public class PlayerRatCollection : MonoBehaviour
 
     public void TakeDamage(int damage, Vector3 position)
     {
+        _isImmune = true;
+        StartCoroutine(Util.AfterDelay(0.5f, () => { _isImmune = false; }));
+
         var direction = (transform.position - position).normalized;
-        Debug.Log(direction);
         _rigidbody.AddForce(direction * damage * 500f);
+
+        DropRat();
+    }
+
+    private void DropRat()
+    {
+        if (transform.childCount == 0) return;
+        var ratToDrop = transform.GetChild(transform.childCount - 1);
+
+        var ratCollision = ratToDrop.GetComponent<Collider>();
+        var ratData = ratToDrop.GetComponent<Rat>();
+
+        ratToDrop.parent = null;
+        ratToDrop.transform.position = transform.position;
+
+        ratCount -= ratData.ratCount;
+        foreach (var ratCollider in _ratBallColliders)
+        {
+            ratCollider.radius -= ratScaleAmount;
+        }
+
+        StartCoroutine(Util.AfterDelay(1f, () => { ratCollision.enabled = true; }));
     }
 }
