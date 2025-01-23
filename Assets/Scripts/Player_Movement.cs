@@ -20,6 +20,7 @@ public class Player_Movement : MonoBehaviour
     private bool isCameraHorizontalTurning = false;
     private bool isCameraVerticalTurning = false;
     private Vector3 cameraTurnDir = Vector3.zero;
+    [SerializeField] private bool hasInvertedCameraVerticalTurning = false;
 
     [Header("Player Jump Varaibles")]
     [SerializeField] private float jumpForce = 1f;
@@ -29,6 +30,7 @@ public class Player_Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Debug.Log(verticalCameraPivot.localEulerAngles.x);
         //Debug.Log(horizontalPivot.forward);
         //if player is inputting a player movement input,...
         if (isPlayerHorizontalMoving)
@@ -70,8 +72,14 @@ public class Player_Movement : MonoBehaviour
         //if player is inputting a vertical camera  turning input,...
         if (isCameraVerticalTurning)
         {
+            
             //rotate the vertical camera pivot point by cameraTurnDir.y clamped between -90 and 90
+            if (verticalCameraPivot.eulerAngles.y >= 89f && cameraTurnDir.y >= 1f)
+                cameraTurnDir.y = 0f;
+            else if(verticalCameraPivot.eulerAngles.y >= 269f && cameraTurnDir.y <= -1f)
+                cameraTurnDir.y = 0f; //Not working correctly
             verticalCameraPivot.Rotate(cameraTurnDir.y * cameraMovespeed, 0f, 0f);
+            //verticalCameraPivot.eulerAngles = new Vector3(verticalCameraPivot.eulerAngles.x, Mathf.Clamp(transform.eulerAngles.y, -89.8f, 89.9f), 0f);
         }
     }
 
@@ -112,7 +120,19 @@ public class Player_Movement : MonoBehaviour
         if (value.Get<Vector2>().y != 0f)
         {
             isCameraVerticalTurning = true;
-            cameraTurnDir.y = value.Get<Vector2>().y;
+
+            //if hasInvertedCameraVerticalTurning is ON,...
+            if (hasInvertedCameraVerticalTurning)
+            {
+                //inverted vertical camera turning
+                cameraTurnDir.y = value.Get<Vector2>().y;
+            }
+            //else hasInvertedCameraVerticalTurning is OFF,...
+            else
+            {
+                //normal vertical camera turning
+                cameraTurnDir.y = -value.Get<Vector2>().y;
+            }
         }
         //else player stopped turning the camera vertically,...
         else

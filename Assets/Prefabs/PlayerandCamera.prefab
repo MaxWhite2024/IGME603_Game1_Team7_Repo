@@ -192,6 +192,7 @@ MonoBehaviour:
   horizontalCameraPivot: {fileID: 376568226358487987}
   verticalCameraPivot: {fileID: 2193713301912632135}
   cameraMovespeed: 2
+  hasInvertedCameraVerticalTurning: 0
   jumpForce: 10
   groundCheckBoxVerticalOffset: -0.32
   groundCheckBoxSize: 0.82
@@ -389,7 +390,7 @@ Transform:
   m_GameObject: {fileID: 4425732763230387730}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.70281005, y: 1.26, z: 0.4804983}
+  m_LocalPosition: {x: 0.70281005, y: 1.26, z: 0.48049927}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -483,7 +484,7 @@ Transform:
   m_GameObject: {fileID: 5009059328522775789}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.70281005, y: 1.26, z: 0.4804983}
+  m_LocalPosition: {x: 0.70281005, y: 1.26, z: 0.48049927}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
