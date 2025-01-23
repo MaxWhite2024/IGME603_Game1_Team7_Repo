@@ -7,14 +7,16 @@ using UnityEngine.UIElements;
 
 public class Player_Movement : MonoBehaviour
 {
-    [Header("Player Movement Variables")]
-    [SerializeField] private Rigidbody playerRigidbody;
+    [Header("Player Movement Variables")] [SerializeField]
+    private Rigidbody playerRigidbody;
+
     [SerializeField] private float moveForce = 0f;
     private bool isPlayerHorizontalMoving = false;
     private Vector3 moveDir = Vector3.zero;
 
-    [Header("Camera Movement Variables")]
-    [SerializeField] private Transform horizontalCameraPivot;
+    [Header("Camera Movement Variables")] [SerializeField]
+    private Transform horizontalCameraPivot;
+
     [SerializeField] private Transform verticalCameraPivot;
     [SerializeField] private float cameraMovespeed = 0f;
     public bool isCameraXInverted;
@@ -23,11 +25,14 @@ public class Player_Movement : MonoBehaviour
     private bool isCameraVerticalTurning = false;
     private Vector3 cameraTurnDir = Vector3.zero;
 
-    [Header("Player Jump Varaibles")]
-    [SerializeField] private float jumpForce = 1f;
+    [Header("Player Jump Varaibles")] [SerializeField]
+    private float jumpForce = 1f;
+
     [SerializeField] private float groundCheckBoxVerticalOffset = 0f;
     [SerializeField] private float groundCheckBoxSize = 1f;
     private bool isGroundDetected;
+
+    public bool canControlPlayer = true;
 
     private void FixedUpdate()
     {
@@ -58,8 +63,11 @@ public class Player_Movement : MonoBehaviour
             //calculate pivotRelativeMovement
             Vector3 pivotRelativeMovement = forwardRelativeHorizontalInput + rightRelativeHorizontalInput;
 
-            //apply moveForce force to the player in the horizontal direction the camera is facing
-            playerRigidbody.AddForce(pivotRelativeMovement * moveForce, ForceMode.Force);
+            if (canControlPlayer)
+            {
+                //apply moveForce force to the player in the horizontal direction the camera is facing
+                playerRigidbody.AddForce(pivotRelativeMovement * moveForce, ForceMode.Force);
+            }
         }
 
         //if player inputting a horizontal camera turning input,...
@@ -80,7 +88,7 @@ public class Player_Movement : MonoBehaviour
     void OnMove(InputValue value)
     {
         //if player started moving the player horizontally,...
-        if(value.Get<Vector2>() != Vector2.zero)
+        if (value.Get<Vector2>() != Vector2.zero)
         {
             isPlayerHorizontalMoving = true;
             moveDir.z = value.Get<Vector2>().y;
@@ -126,12 +134,16 @@ public class Player_Movement : MonoBehaviour
 
     void OnJump()
     {
+        if (!canControlPlayer) return;
+        
         //box cast from:
         //center = gameObject.transform.position + new Vector3(0f, groundCheckBoxVerticalOffset, 0f)
         //halfExtends = Vector3.one * groundCheckBoxSize / 2f
         //orientation = Quaternion.identity
         //layerMask = LayerMask.GetMask("Ground")
-        isGroundDetected = Physics.CheckBox(gameObject.transform.position + new Vector3(0f, groundCheckBoxVerticalOffset, 0f), Vector3.one * groundCheckBoxSize / 2f, Quaternion.identity, LayerMask.GetMask("Ground"));
+        isGroundDetected =
+            Physics.CheckBox(gameObject.transform.position + new Vector3(0f, groundCheckBoxVerticalOffset, 0f),
+                Vector3.one * groundCheckBoxSize / 2f, Quaternion.identity, LayerMask.GetMask("Ground"));
 
         //if CheckBox hit something,...
         if (isGroundDetected)
@@ -145,6 +157,7 @@ public class Player_Movement : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(gameObject.transform.position + new Vector3(0f, groundCheckBoxVerticalOffset, 0f), Vector3.one * groundCheckBoxSize);
+        Gizmos.DrawWireCube(gameObject.transform.position + new Vector3(0f, groundCheckBoxVerticalOffset, 0f),
+            Vector3.one * groundCheckBoxSize);
     }
 }

@@ -8,11 +8,12 @@ public class PlayerRatCollection : MonoBehaviour
 
     private SphereCollider[] _ratBallColliders;
     private Rigidbody _rigidbody;
-
+    private Player_Movement _movement;
     private bool _isImmune = false;
 
     private void Start()
     {
+        _movement = GetComponent<Player_Movement>();
         _ratBallColliders = GetComponents<SphereCollider>();
         _rigidbody = GetComponent<Rigidbody>();
     }
@@ -24,6 +25,7 @@ public class PlayerRatCollection : MonoBehaviour
         if (rat != null)
         {
             //Debug.Log("Rat is here");
+            if (ratCount == 0) _movement.canControlPlayer = true;
             ratCount += rat.ratCount;
             if (collectiveHitbox) collectiveHitbox.damage = ratCount;
             otherCollider.transform.parent = transform;
@@ -104,6 +106,7 @@ public class PlayerRatCollection : MonoBehaviour
 
     public void TakeDamage(int damage, Vector3 position)
     {
+        if (_isImmune) return;
         _isImmune = true;
         StartCoroutine(Util.AfterDelay(0.5f, () => { _isImmune = false; }));
 
@@ -125,6 +128,7 @@ public class PlayerRatCollection : MonoBehaviour
         ratToDrop.transform.position = transform.position;
 
         ratCount -= ratData.ratCount;
+        if (ratCount == 0) _movement.canControlPlayer = false;
         foreach (var ratCollider in _ratBallColliders)
         {
             ratCollider.radius -= ratScaleAmount;

@@ -18,6 +18,17 @@ public class RatCountUI : MonoBehaviour
     private void Update()
     {
         text.text = $"{player.ratCount}/{requirement}";
-        text.color = player.ratCount >= requirement ? Color.green : Color.white;
+        if (player.ratCount >= requirement)
+        {
+            text.color = Color.green;
+        }
+        else if (player.ratCount <= 0)
+        {
+            text.color = Color.red;
+        }
+        else
+        {
+            text.color = Color.white;
+        }
     }
 }
