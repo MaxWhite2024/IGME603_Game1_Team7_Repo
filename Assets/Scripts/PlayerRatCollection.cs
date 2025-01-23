@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerRatCollection : MonoBehaviour
 {
     public short ratCount;
+    public float ratScaleAmount;
     [SerializeField] private Hitbox collectiveHitbox;
+    [SerializeField] private SphereCollider colliderToScale;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +29,9 @@ public class PlayerRatCollection : MonoBehaviour
             ratCount += rat.ratCount;
             if (collectiveHitbox) collectiveHitbox.damage = ratCount;
             collider.transform.parent = transform;
+            collider.enabled = false;
+            colliderToScale.radius += ratScaleAmount;
+
             return;
         }
 

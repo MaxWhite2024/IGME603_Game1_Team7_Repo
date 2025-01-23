@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4754284419438212007}
-  - component: {fileID: 2795854588666734887}
-  - component: {fileID: 7254184141456574963}
+  - component: {fileID: 6472227487790622144}
+  - component: {fileID: 8338439954896585616}
   - component: {fileID: 1635103961913107651}
   - component: {fileID: 6976812525162923774}
   - component: {fileID: 8937902333764854191}
@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 3920859553509280103}
   - component: {fileID: 711289420266255703}
   - component: {fileID: 6634619333662350488}
-  - component: {fileID: 6668666615970885110}
   m_Layer: 8
   m_Name: PlayerBall
   m_TagString: Untagged
@@ -47,7 +46,7 @@ Transform:
   - {fileID: 8294931307244480857}
   m_Father: {fileID: 2552833553449287821}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2795854588666734887
+--- !u!33 &6472227487790622144
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,7 +54,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 863024876728598553}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &7254184141456574963
+--- !u!23 &8338439954896585616
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -258,20 +257,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ratCount: 1
+  ratScaleAmount: 0.02
   collectiveHitbox: {fileID: 3920859553509280103}
---- !u!114 &6668666615970885110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863024876728598553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df48761e8ffa4dd6ac6e17ed8337e83e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  respawnHeight: -100
+  colliderToScale: {fileID: 1635103961913107651}
 --- !u!1 &4402323142231814773
 GameObject:
   m_ObjectHideFlags: 0
