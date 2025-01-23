@@ -23,7 +23,7 @@ public class FireHydrant : RatChecker
         
     }
 
-    new public void EnoughRats()
+    public override void EnoughRats()
     {
         Debug.Log("This is a hydrant");
         if(broken)

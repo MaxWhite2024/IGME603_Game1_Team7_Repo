@@ -18,8 +18,9 @@ public class RatChecker : MonoBehaviour
         
     }
 
-    public void EnoughRats()
+    public virtual void EnoughRats()
     {
-        Debug.Log("You win!");
+        //Debug.Log("You win!");
+        Destroy(gameObject);
     }
 }
