@@ -22,7 +22,10 @@ public class Player_Movement : MonoBehaviour
     private bool isCameraHorizontalTurning = false;
     private bool isCameraVerticalTurning = false;
     private Vector3 cameraTurnDir = Vector3.zero;
-    [SerializeField] private bool hasInvertedCameraVerticalTurning = false;
+    private float oldTargetCameraDistance;
+    [SerializeField] private float targetCameraDistance;
+    [SerializeField] private float cameraDistanceChangeSpeed = 0f;
+    [SerializeField] private float ratCollectionCameraChangeAmount;
 
     [Header("Player Jump Varaibles")]
     [SerializeField] private float jumpForce = 1f;
@@ -30,9 +33,22 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private float groundCheckBoxSize = 1f;
     private bool isGroundDetected;
 
+    private void Start()
+    {
+        targetCameraDistance = Vector3.Distance(Camera.main.gameObject.transform.position, gameObject.transform.position);
+        oldTargetCameraDistance = targetCameraDistance;
+    }
+
+    private void Update()
+    {
+        //calculate direction from player to camera
+        Vector3 direction = Camera.main.gameObject.transform.position - gameObject.transform.position;
+        Vector3.Lerp(direction * oldTargetCameraDistance, direction * targetCameraDistance, Time.deltaTime);
+    }
+
     private void FixedUpdate()
     {
-        Debug.Log(verticalCameraPivot.localEulerAngles.x);
+        //Debug.Log(verticalCameraPivot.localEulerAngles.x);
         //Debug.Log(horizontalPivot.forward);
         //if player is inputting a player movement input,...
         if (isPlayerHorizontalMoving)
@@ -74,7 +90,6 @@ public class Player_Movement : MonoBehaviour
         //if player is inputting a vertical camera  turning input,...
         if (isCameraVerticalTurning)
         {
-            
             //rotate the vertical camera pivot point by cameraTurnDir.y clamped between -90 and 90
             //if (verticalCameraPivot.localEulerAngles.y >= 89f && cameraTurnDir.y >= 1f)
             //    cameraTurnDir.y = 0f;
@@ -130,6 +145,18 @@ public class Player_Movement : MonoBehaviour
             isCameraVerticalTurning = false;
             cameraTurnDir.y = 0f;
         }
+    }
+
+    public void ChangeCameraDistance(short changeAmount)
+    {
+        //save old target distance
+        oldTargetCameraDistance = targetCameraDistance;
+
+        //change target distance
+        if (changeAmount >= 0)
+            targetCameraDistance += ratCollectionCameraChangeAmount;
+        else
+            targetCameraDistance -= ratCollectionCameraChangeAmount;
     }
 
     void OnJump()

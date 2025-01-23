@@ -26,7 +26,7 @@ public class PlayerRatCollection : MonoBehaviour
         if (rat != null)
         {
             //Debug.Log("Rat is here");
-            ratCount += rat.ratCount;
+            OnRatCountChange(rat.ratCount);
             if (collectiveHitbox) collectiveHitbox.damage = ratCount;
             collider.transform.parent = transform;
             collider.enabled = false;
@@ -99,5 +99,14 @@ public class PlayerRatCollection : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         gameObject.GetComponent<Rigidbody>().useGravity = true; //Enables gravity when you exit bouncy thing
+    }
+
+    private void OnRatCountChange(short changeAmount)
+    {
+        //change camera distance
+        gameObject.GetComponent<Player_Movement>().ChangeCameraDistance(changeAmount);
+
+        //increase rat count
+        ratCount += changeAmount;
     }
 }
