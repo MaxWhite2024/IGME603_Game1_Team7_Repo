@@ -7,10 +7,12 @@ public class PlayerRatCollection : MonoBehaviour
     [SerializeField] private Hitbox collectiveHitbox;
 
     private SphereCollider[] _ratBallColliders;
+    private Rigidbody _rigidbody;
     
     private void Start()
     {
         _ratBallColliders = GetComponents<SphereCollider>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
 
@@ -100,6 +102,8 @@ public class PlayerRatCollection : MonoBehaviour
 
     public void TakeDamage(int damage, Vector3 position)
     {
-        
+        var direction = (transform.position - position).normalized;
+        Debug.Log(direction);
+        _rigidbody.AddForce(direction * damage * 500f);
     }
 }
