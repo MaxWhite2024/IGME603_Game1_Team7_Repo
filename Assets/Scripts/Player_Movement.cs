@@ -17,6 +17,8 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private Transform horizontalCameraPivot;
     [SerializeField] private Transform verticalCameraPivot;
     [SerializeField] private float cameraMovespeed = 0f;
+    public bool isCameraXInverted;
+    public bool isCameraYInverted;
     private bool isCameraHorizontalTurning = false;
     private bool isCameraVerticalTurning = false;
     private Vector3 cameraTurnDir = Vector3.zero;
@@ -99,7 +101,7 @@ public class Player_Movement : MonoBehaviour
         if (value.Get<Vector2>().x != 0f)
         {
             isCameraHorizontalTurning = true;
-            cameraTurnDir.x = value.Get<Vector2>().x;
+            cameraTurnDir.x = value.Get<Vector2>().x * (isCameraXInverted ? -1f : 1f);
         }
         //else player stopped turning the camera horizontally,...
         else
@@ -112,7 +114,7 @@ public class Player_Movement : MonoBehaviour
         if (value.Get<Vector2>().y != 0f)
         {
             isCameraVerticalTurning = true;
-            cameraTurnDir.y = value.Get<Vector2>().y;
+            cameraTurnDir.y = value.Get<Vector2>().y * (isCameraYInverted ? -1f : 1f);
         }
         //else player stopped turning the camera vertically,...
         else
