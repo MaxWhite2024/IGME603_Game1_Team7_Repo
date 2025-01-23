@@ -7,15 +7,7 @@ public class PlayerRatCollection : MonoBehaviour
     [SerializeField] private Hitbox collectiveHitbox;
     [SerializeField] private SphereCollider colliderToScale;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
+    
 
     private void CollisionLogic(Collider collider)
     {

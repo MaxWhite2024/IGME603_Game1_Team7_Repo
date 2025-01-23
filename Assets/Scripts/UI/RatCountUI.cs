@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -19,13 +18,6 @@ public class RatCountUI : MonoBehaviour
     private void Update()
     {
         text.text = $"{player.ratCount}/{requirement}";
-        if (player.ratCount >= requirement)
-        {
-            text.color = Color.green;
-        }
-        else
-        {
-            text.color = Color.white;
-        }
+        text.color = player.ratCount >= requirement ? Color.green : Color.white;
     }
 }
