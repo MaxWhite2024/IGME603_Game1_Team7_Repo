@@ -12,6 +12,6 @@ public class Hitbox : MonoBehaviour
         
         Debug.Log($"Trigger enter {name} -> {other.name}");
         
-        hurtbox.TakeDamage(damage);
+        hurtbox.TakeDamage(damage, transform.position);
     }
 }
