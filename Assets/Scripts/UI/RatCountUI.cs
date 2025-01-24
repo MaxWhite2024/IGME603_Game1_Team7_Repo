@@ -31,4 +31,9 @@ public class RatCountUI : MonoBehaviour
             text.color = Color.white;
         }
     }
+
+    public void ChangeRequirement(int newRequirement)
+    {
+        requirement = newRequirement;
+    }
 }
