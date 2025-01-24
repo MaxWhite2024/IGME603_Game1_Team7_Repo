@@ -125,7 +125,7 @@ public class PlayerRatCollection : MonoBehaviour
         var ratData = ratToDrop.GetComponent<Rat>();
 
         ratToDrop.parent = null;
-        ratToDrop.transform.position = transform.position;
+        ratToDrop.transform.position = ratToDrop.transform.position.Copy(y: transform.position.y);
 
         ratCount -= ratData.ratCount;
         if (ratCount == 0) _movement.canControlPlayer = false;
