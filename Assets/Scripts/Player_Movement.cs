@@ -24,10 +24,11 @@ public class Player_Movement : MonoBehaviour
     private bool isCameraHorizontalTurning = false;
     private bool isCameraVerticalTurning = false;
     private Vector3 cameraTurnDir = Vector3.zero;
-    private float oldTargetCameraDistance;
-    [SerializeField] private float targetCameraDistance;
-    [SerializeField] private float cameraDistanceChangeSpeed = 0f;
-    [SerializeField] private float ratCollectionCameraChangeAmount;
+    private float oldCameraFOV;
+    [SerializeField] private float targetCameraFOV;
+    //[SerializeField] private float cameraDistanceChangeSpeed = 1f;
+    [SerializeField] private float ratCollectionCameraChangeAmount = 1f;
+    [SerializeField] private float maxFOV = 80f;
 
     [Header("Player Jump Varaibles")] 
     [SerializeField] private float jumpForce = 1f;
@@ -38,15 +39,20 @@ public class Player_Movement : MonoBehaviour
 
     private void Start()
     {
-        targetCameraDistance = Vector3.Distance(Camera.main.gameObject.transform.position, gameObject.transform.position);
-        oldTargetCameraDistance = targetCameraDistance;
+        targetCameraFOV = oldCameraFOV = Camera.main.fieldOfView;
+        //targetCameraDistance = Vector3.Distance(Camera.main.gameObject.transform.position, gameObject.transform.position);
+        //oldTargetCameraDistance = targetCameraDistance;
     }
 
     private void Update()
     {
         //calculate direction from player to camera
-        Vector3 direction = Camera.main.gameObject.transform.position - gameObject.transform.position;
-        Camera.main.gameObject.transform.position = Vector3.Lerp(direction * oldTargetCameraDistance, direction * targetCameraDistance, Time.deltaTime);
+        //Vector3 direction = Camera.main.gameObject.transform.position - gameObject.transform.position;
+        //Camera.main.gameObject.transform.position = Vector3.Lerp(direction * oldTargetCameraDistance, direction * targetCameraDistance, Time.deltaTime);
+        if(Camera.main.fieldOfView <= maxFOV)
+            Camera.main.fieldOfView = Mathf.Lerp(oldCameraFOV, targetCameraFOV, Time.deltaTime);
+        else
+            Camera.main.fieldOfView = maxFOV;
     }
    
 
@@ -151,14 +157,26 @@ public class Player_Movement : MonoBehaviour
 
     public void ChangeCameraDistance(short changeAmount)
     {
-        //save old target distance
-        oldTargetCameraDistance = targetCameraDistance;
-
-        //change target distance
+        //if changeAmount is positive,...
         if (changeAmount >= 0)
-            targetCameraDistance += ratCollectionCameraChangeAmount;
+        {
+            Debug.Log(Camera.main.fieldOfView + ratCollectionCameraChangeAmount);
+            Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView + ratCollectionCameraChangeAmount, 60f, maxFOV);
+        }
+        //else changeAmount is negative,...
         else
-            targetCameraDistance -= ratCollectionCameraChangeAmount;
+        {
+            Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView - ratCollectionCameraChangeAmount, 60f, maxFOV);
+        }
+
+        ////save old target FOV
+        //oldCameraFOV = targetCameraFOV;
+
+        ////change target distance
+        //if (changeAmount >= 0)
+        //    targetCameraFOV += ratCollectionCameraChangeAmount;
+        //else
+        //    targetCameraFOV -= ratCollectionCameraChangeAmount;
     }
 
     void OnJump()
