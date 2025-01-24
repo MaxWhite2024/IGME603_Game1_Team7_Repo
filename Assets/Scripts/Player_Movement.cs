@@ -46,7 +46,7 @@ public class Player_Movement : MonoBehaviour
     {
         //calculate direction from player to camera
         Vector3 direction = Camera.main.gameObject.transform.position - gameObject.transform.position;
-        Vector3.Lerp(direction * oldTargetCameraDistance, direction * targetCameraDistance, Time.deltaTime);
+        Camera.main.gameObject.transform.position = Vector3.Lerp(direction * oldTargetCameraDistance, direction * targetCameraDistance, Time.deltaTime);
     }
    
 
@@ -97,11 +97,6 @@ public class Player_Movement : MonoBehaviour
         //if player is inputting a vertical camera  turning input,...
         if (isCameraVerticalTurning)
         {
-            //rotate the vertical camera pivot point by cameraTurnDir.y clamped between -90 and 90
-            //if (verticalCameraPivot.localEulerAngles.y >= 89f && cameraTurnDir.y >= 1f)
-            //    cameraTurnDir.y = 0f;
-            //else if(verticalCameraPivot.localEulerAngles.y >= 269f && cameraTurnDir.y <= -1f)
-            //    cameraTurnDir.y = 0f; //Not working correctly
             verticalCameraPivot.Rotate(cameraTurnDir.y * cameraMovespeed, 0f, 0f);
             verticalCameraPivot.eulerAngles = new Vector3(verticalCameraPivot.eulerAngles.x, Mathf.Clamp(transform.eulerAngles.y, -89.8f, 89.9f), 0f);
         }

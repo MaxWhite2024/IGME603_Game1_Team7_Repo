@@ -136,7 +136,7 @@ public class PlayerRatCollection : MonoBehaviour
         ratToDrop.parent = null;
         ratToDrop.transform.position = ratToDrop.transform.position.Copy(y: transform.position.y);
 
-        OnRatCountChange(-ratData.ratCount);
+        OnRatCountChange((short)-ratData.ratCount);
         if (ratCount == 0) _movement.canControlPlayer = false;
         foreach (var ratCollider in _ratBallColliders)
         {
