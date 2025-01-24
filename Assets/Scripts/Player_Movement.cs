@@ -14,9 +14,8 @@ public class Player_Movement : MonoBehaviour
     private bool isPlayerHorizontalMoving = false;
     private Vector3 moveDir = Vector3.zero;
 
-    [Header("Camera Movement Variables")] [SerializeField]
-    private Transform horizontalCameraPivot;
-
+    [Header("Camera Movement Variables")]
+    [SerializeField] private Transform horizontalCameraPivot;
     [SerializeField] private Transform verticalCameraPivot;
     [SerializeField] private float cameraMovespeed = 0f;
     public bool isCameraXInverted;
@@ -54,7 +53,6 @@ public class Player_Movement : MonoBehaviour
         else
             Camera.main.fieldOfView = maxFOV;
     }
-   
 
     private void FixedUpdate()
     {

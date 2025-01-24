@@ -191,7 +191,7 @@ MonoBehaviour:
   moveForce: 6
   horizontalCameraPivot: {fileID: 376568226358487987}
   verticalCameraPivot: {fileID: 2193713301912632135}
-  cameraMovespeed: 2
+  cameraMovespeed: 4
   isCameraXInverted: 0
   isCameraYInverted: 0
   targetCameraFOV: 0
