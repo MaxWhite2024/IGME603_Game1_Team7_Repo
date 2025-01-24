@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class RatChecker : MonoBehaviour
 {
-    public short ratCountNeeded;
+    public int ratCountNeeded;
+    public int nextRatMilestone;
+    [SerializeField] private RatCountUI ratCountUI;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,7 @@ public class RatChecker : MonoBehaviour
     public virtual void EnoughRats()
     {
         //Debug.Log("You win!");
+        ratCountUI.ChangeRequirement(nextRatMilestone);
         Destroy(gameObject);
     }
 }
