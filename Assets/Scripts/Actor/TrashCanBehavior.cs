@@ -13,9 +13,11 @@ public class TrashCanBehavior : MonoBehaviour
 
     private bool _isTipped = false;
 
-    public void AttemptTip(int damage)
+    public void AttemptTip(int damage, Vector3 position)
     {
         if (_isTipped) return;
+        var target = position.Copy(y: transform.position.y);
+        transform.rotation = Quaternion.LookRotation(transform.position - target);
 
         Debug.Log($"Tip attempted {damage}");
         if (damage >= requirement)

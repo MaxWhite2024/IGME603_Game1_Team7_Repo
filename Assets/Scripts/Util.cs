@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public static class Util
@@ -21,5 +23,11 @@ public static class Util
     public static float DistanceTo2D(this Vector3 self, Vector3 other)
     {
         return Mathf.Sqrt(self.DistanceTo2DSquared(other));
+    }
+
+    public static IEnumerator AfterDelay(float delaySeconds, Action lambda)
+    {
+        yield return new WaitForSeconds(delaySeconds);
+        lambda?.Invoke();
     }
 }

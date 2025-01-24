@@ -1,42 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerRatCollection : MonoBehaviour
 {
     public short ratCount;
     public float ratScaleAmount;
     [SerializeField] private Hitbox collectiveHitbox;
-    [SerializeField] private SphereCollider colliderToScale;
 
-    // Start is called before the first frame update
-    void Start()
+    private SphereCollider[] _ratBallColliders;
+    private Rigidbody _rigidbody;
+    private Player_Movement _movement;
+    private bool _isImmune = false;
+
+    private void Start()
     {
+        _movement = GetComponent<Player_Movement>();
+        _ratBallColliders = GetComponents<SphereCollider>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
 
-    private void CollisionLogic(Collider collider)
+    private void CollisionLogic(Collider otherCollider)
     {
-        Rat rat = collider.GetComponent<Rat>();
+        Rat rat = otherCollider.GetComponent<Rat>();
         if (rat != null)
         {
             //Debug.Log("Rat is here");
+            if (ratCount == 0) _movement.canControlPlayer = true;
             OnRatCountChange(rat.ratCount);
             if (collectiveHitbox) collectiveHitbox.damage = ratCount;
-            collider.transform.parent = transform;
-            collider.enabled = false;
-            colliderToScale.radius += ratScaleAmount;
+            otherCollider.transform.parent = transform;
+            otherCollider.enabled = false;
+            foreach (var ratCollider in _ratBallColliders)
+            {
+                ratCollider.radius += ratScaleAmount;
+            }
 
             return;
         }
 
         //Not colliding with a rat
-        RatChecker checker = collider.GetComponent<RatChecker>();
+        RatChecker checker = otherCollider.GetComponent<RatChecker>();
         if (checker != null)
         {
             if (ratCount >= checker.ratCountNeeded)
@@ -56,7 +59,7 @@ public class PlayerRatCollection : MonoBehaviour
             return;
         }
 
-        BouncyThings bouncy = collider.GetComponent<BouncyThings>();
+        BouncyThings bouncy = otherCollider.GetComponent<BouncyThings>();
         if (bouncy != null)
         {
             gameObject.GetComponent<Rigidbody>().useGravity = false; //Disables gravity so you don't fall down
@@ -108,5 +111,38 @@ public class PlayerRatCollection : MonoBehaviour
 
         //increase rat count
         ratCount += changeAmount;
+    }
+
+    public void TakeDamage(int damage, Vector3 position)
+    {
+        if (_isImmune) return;
+        _isImmune = true;
+        StartCoroutine(Util.AfterDelay(0.5f, () => { _isImmune = false; }));
+
+        var direction = (transform.position - position).normalized;
+        _rigidbody.AddForce(direction * damage * 500f);
+
+        DropRat();
+    }
+
+    private void DropRat()
+    {
+        if (transform.childCount == 0) return;
+        var ratToDrop = transform.GetChild(transform.childCount - 1);
+
+        var ratCollision = ratToDrop.GetComponent<Collider>();
+        var ratData = ratToDrop.GetComponent<Rat>();
+
+        ratToDrop.parent = null;
+        ratToDrop.transform.position = ratToDrop.transform.position.Copy(y: transform.position.y);
+
+        OnRatCountChange(-ratData.ratCount);
+        if (ratCount == 0) _movement.canControlPlayer = false;
+        foreach (var ratCollider in _ratBallColliders)
+        {
+            ratCollider.radius -= ratScaleAmount;
+        }
+
+        StartCoroutine(Util.AfterDelay(1f, () => { ratCollision.enabled = true; }));
     }
 }
