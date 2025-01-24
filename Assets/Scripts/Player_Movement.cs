@@ -179,6 +179,13 @@ public class Player_Movement : MonoBehaviour
         //    targetCameraFOV -= ratCollectionCameraChangeAmount;
     }
 
+    public void ChangeGroundCheckHitbox(float changeAmount)
+    {
+        groundCheckBoxVerticalOffset -= changeAmount;
+
+        groundCheckBoxSize += changeAmount;
+    }
+
     void OnJump()
     {
         if (!canControlPlayer) return;

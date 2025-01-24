@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerRatCollection : MonoBehaviour
 {
@@ -108,6 +109,9 @@ public class PlayerRatCollection : MonoBehaviour
     {
         //change camera distance
         gameObject.GetComponent<Player_Movement>().ChangeCameraDistance(changeAmount);
+
+        //change ground check hitbox and size 
+        gameObject.GetComponent<Player_Movement>().ChangeGroundCheckHitbox((float)changeAmount * ratScaleAmount);
 
         //increase rat count
         ratCount += changeAmount;
