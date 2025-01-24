@@ -23,9 +23,8 @@ public class Player_Movement : MonoBehaviour
     private bool isCameraHorizontalTurning = false;
     private bool isCameraVerticalTurning = false;
     private Vector3 cameraTurnDir = Vector3.zero;
-    private float oldCameraFOV;
     [SerializeField] private float targetCameraFOV;
-    //[SerializeField] private float cameraDistanceChangeSpeed = 1f;
+    [SerializeField] private float cameraDistanceChangeSpeed = 1f;
     [SerializeField] private float ratCollectionCameraChangeAmount = 1f;
     [SerializeField] private float maxFOV = 80f;
 
@@ -38,9 +37,7 @@ public class Player_Movement : MonoBehaviour
 
     private void Start()
     {
-        targetCameraFOV = oldCameraFOV = Camera.main.fieldOfView;
-        //targetCameraDistance = Vector3.Distance(Camera.main.gameObject.transform.position, gameObject.transform.position);
-        //oldTargetCameraDistance = targetCameraDistance;
+        targetCameraFOV = Camera.main.fieldOfView;
     }
 
     private void Update()
@@ -48,10 +45,8 @@ public class Player_Movement : MonoBehaviour
         //calculate direction from player to camera
         //Vector3 direction = Camera.main.gameObject.transform.position - gameObject.transform.position;
         //Camera.main.gameObject.transform.position = Vector3.Lerp(direction * oldTargetCameraDistance, direction * targetCameraDistance, Time.deltaTime);
-        if(Camera.main.fieldOfView <= maxFOV)
-            Camera.main.fieldOfView = Mathf.Lerp(oldCameraFOV, targetCameraFOV, Time.deltaTime);
-        else
-            Camera.main.fieldOfView = maxFOV;
+
+        Camera.main.fieldOfView = Mathf.MoveTowards(Camera.main.fieldOfView, targetCameraFOV, Time.deltaTime * cameraDistanceChangeSpeed);
     }
 
     private void FixedUpdate()
@@ -158,23 +153,14 @@ public class Player_Movement : MonoBehaviour
         //if changeAmount is positive,...
         if (changeAmount >= 0)
         {
-            Debug.Log(Camera.main.fieldOfView + ratCollectionCameraChangeAmount);
-            Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView + ratCollectionCameraChangeAmount, 60f, maxFOV);
+            //Debug.Log(Camera.main.fieldOfView + ratCollectionCameraChangeAmount);
+            targetCameraFOV = Mathf.Clamp(Camera.main.fieldOfView + ratCollectionCameraChangeAmount, 60f, maxFOV);
         }
         //else changeAmount is negative,...
         else
         {
-            Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView - ratCollectionCameraChangeAmount, 60f, maxFOV);
+            targetCameraFOV = Mathf.Clamp(Camera.main.fieldOfView - ratCollectionCameraChangeAmount, 60f, maxFOV);
         }
-
-        ////save old target FOV
-        //oldCameraFOV = targetCameraFOV;
-
-        ////change target distance
-        //if (changeAmount >= 0)
-        //    targetCameraFOV += ratCollectionCameraChangeAmount;
-        //else
-        //    targetCameraFOV -= ratCollectionCameraChangeAmount;
     }
 
     public void ChangeGroundCheckHitbox(float changeAmount)

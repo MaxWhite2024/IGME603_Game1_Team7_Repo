@@ -195,6 +195,7 @@ MonoBehaviour:
   isCameraXInverted: 0
   isCameraYInverted: 0
   targetCameraFOV: 0
+  cameraDistanceChangeSpeed: 1
   ratCollectionCameraChangeAmount: 1
   maxFOV: 80
   jumpForce: 10

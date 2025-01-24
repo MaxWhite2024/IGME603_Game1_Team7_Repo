@@ -1481,14 +1481,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4460503315491252117, guid: aad19136699a252499b3b1d5434b4f6c, type: 3}
-      propertyPath: cameraDistanceChangeSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4460503315491252117, guid: aad19136699a252499b3b1d5434b4f6c, type: 3}
-      propertyPath: ratCollectionCameraChangeAmount
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 4533504726677909101, guid: aad19136699a252499b3b1d5434b4f6c, type: 3}
       propertyPath: m_Name
       value: PlayerandCamera
