@@ -27,6 +27,7 @@ public class Player_Movement : MonoBehaviour
     [SerializeField] private float cameraDistanceChangeSpeed = 1f;
     [SerializeField] private float ratCollectionCameraChangeAmount = 1f;
     [SerializeField] private float maxFOV = 80f;
+    [SerializeField] private GameObject cameraTryToGetTo;
 
     [Header("Player Jump Varaibles")] 
     [SerializeField] private float jumpForce = 1f;
@@ -42,9 +43,17 @@ public class Player_Movement : MonoBehaviour
 
     private void Update()
     {
-        //calculate direction from player to camera
-        //Vector3 direction = Camera.main.gameObject.transform.position - gameObject.transform.position;
-        //Camera.main.gameObject.transform.position = Vector3.Lerp(direction * oldTargetCameraDistance, direction * targetCameraDistance, Time.deltaTime);
+        //if a linecast from player to camera hit anything (that wasn't the player)
+        RaycastHit hitInfo;
+        if (Physics.Linecast(gameObject.transform.position, cameraTryToGetTo.transform.position, out hitInfo, LayerMask.GetMask("Ground")))
+        {
+            Debug.Log("Ground in way of camera");
+            Camera.main.transform.position = hitInfo.point;
+        }
+        else
+        {
+            Camera.main.transform.position = cameraTryToGetTo.transform.position;
+        }
 
         Camera.main.fieldOfView = Mathf.MoveTowards(Camera.main.fieldOfView, targetCameraFOV, Time.deltaTime * cameraDistanceChangeSpeed);
     }
