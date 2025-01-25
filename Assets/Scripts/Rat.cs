@@ -9,10 +9,10 @@ public class Rat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(ratCount <= 0)
+        /*if(ratCount <= 0)
         {
             Destroy(this.gameObject);
-        }
+        }*/
     }
 
     // Update is called once per frame
